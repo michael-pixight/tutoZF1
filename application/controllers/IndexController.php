@@ -13,6 +13,27 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 
+    public function modifierAction()
+    {
+        // action body
+    }
+
+    public function ajouterAction()
+    {
+        // action body
+    }
+
+    public function supprimerAction()
+    {
+        // action body
+    }
+
 
 }
+
+
+
+
+
+
 
