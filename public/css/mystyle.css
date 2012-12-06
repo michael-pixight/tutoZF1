@@ -1,0 +1,33 @@
+/*mon template perso*/
+
+ul{
+	position: relative;
+}
+
+ul.second{
+	background-color: #008FC5;
+    border: 2px solid #FFFFFF;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 15px 20px;
+    position: absolute;
+    text-align: left;
+   	left:-50px;
+   	top: 76px;
+   	visibility: hidden;
+   	padding-top: 20px;
+    /*transition-duration: 0.3s;
+    transition-property: all;*/
+}
+
+ul.second a{
+	width: 98%;
+}
+
+li:hover ul.second{
+	visibility: visible;
+	opacity: 1;
+	top: 76px;
+	left:0px;
+}
