@@ -1,12 +1,16 @@
 <?php
-$this->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge,chrome=1');
+echo $this->doctype();
+//DEPLACEMENT VERS BOOTSTRAP.PHP : la section d'initialisation des meta etc.. dans le bootstrap.php, ça regle les problemes notés @FLAG
+
+/*$this->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge,chrome=1');
 $this->headMeta()->appendName('keywords', 'framework, PHP, productivité');
 $this->headTitle()->setSeparator(' - ');
-$this->headTitle('Tutoriel Zend Framework');
+$this->headTitle('Tutoriel Zend Framework');*/
 //@FLAG = pour que ça ne plante pas et que j'ai bien un encodage utf-8 en html5 je dois faire mon setCharset après echo $this->doctype('HTML5');, etrange non?
 // début de réponse, si je place dans application.ini le resources.view.doctype = "HTML5" alors je peux placer echo $this->doctype(); à la fin, mais sans HTML5 en argument
-$this->headMeta()->setCharset('UTF-8'); // Will look like <meta charset="UTF-8">
-echo $this->doctype();
+//$this->headMeta()->setCharset('UTF-8'); // Will look like <meta charset="UTF-8">
+
+//#END DEPLACEMENT VERS BOOTSTRAP.PHP 
 ?>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -15,9 +19,11 @@ echo $this->doctype();
 <head>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headTitle(); ?>
-    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/normalize.css'); ?>
-    <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/main.css'); ?>
+        <?php $this->headLink()->prependStylesheet($this->baseUrl().'/css/main.css'); ?>
+    <?php $this->headLink()->prependStylesheet($this->baseUrl().'/css/normalize.css'); ?>
+
    
+    <?php echo $this->headLink(); ?>
 </head>
 <body>
     <!--[if lt IE 7]>

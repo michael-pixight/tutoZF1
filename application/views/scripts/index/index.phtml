@@ -1,7 +1,23 @@
 <?php
 $this->title = 'Mes Albums';
 $this->headTitle($this->title);
+
+//Session 
+$mysession = new Zend_Session_Namespace('mysession');
+
+if (!isset($mysession->counter)) {
+    $mysession->counter = 1000;
+} else {
+    $mysession->counter++;
+}
+
+if ($mysession->counter > 1999) {
+    unset($mysession->counter);
+}
+echo $mysession->counter;
+//#end test sessions
 ?>
+<a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>
 <p><a href="<?php echo $this->url(array('controller'=>'index','action'=>'ajouter'));?>">Ajouter de nouveaux albums</a></p>
 <table>
     <tr>
