@@ -1,4 +1,12 @@
 <?php
 
-$this->loginForm->setAction($this->url());
-echo $this->loginForm;
+/*$this->loginForm->setAction($this->url());
+echo $this->loginForm;*/
+
+ if ( isset($this->identity) ) : ?>
+
+<h6>Salut <?php echo $this->escape( $this->identity['name'] ); ?></h6>
+    
+<?php else : ?>
+    <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>
+<?php endif; ?>

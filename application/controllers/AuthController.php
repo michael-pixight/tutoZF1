@@ -2,8 +2,27 @@
 
 class AuthController extends Zend_Controller_Action{
     
-    public function loginAction(){
-        echo 'resultat valide';
+    public function init(){
+        
+    }
+    
+    public function indexAction(){
+        $auth = Zend_Auth::getInstance();
+        $auth->getStorage()->write(array('name' => "admin"));
+        if( $auth->hasIdentity() ){
+            $this->view->identity = $auth->getIdentity();
+        }
+    }
+    
+    public function loginAction(){        
+                    
+        $auth = Zend_Auth::getInstance();
+        $auth->getStorage()->write(array('name' => "admin"));
+        if( $auth->hasIdentity() ){
+            $this->view->identity = $auth->getIdentity();
+        }
+        $this->_redirect('/');
+        /*
         $db = $this->_getParam('db');
         $loginForm = new Application_Form_Auth_Login();
         
@@ -14,13 +33,11 @@ class AuthController extends Zend_Controller_Action{
                     'users',
                     'username',
                     'password'
-                    /*'MD5(CONCAT(?, password_salt))'*/
+                    /*'MD5(CONCAT(?, password_salt))'*//*
             );
             
             $adapter->setIdentity($loginForm->getValue('username'));
             $adapter->setCredential($loginForm->getValue('password'));
-            
-            $auth = Zend_Auth::getInstance();
             $result = $auth->authenticate($adapter);
             
             if( $result->isValid() ){
@@ -33,7 +50,10 @@ class AuthController extends Zend_Controller_Action{
             }
         }
         $this->view->loginForm = $loginForm;
+        */
     }
     
-    
+    public function logoutAction(){
+        Zend_Auth::getInstance()->clearIdentity();
+    }
 }

@@ -11,6 +11,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle('Tutoriel Zend Framework');
         $view->headMeta()->setCharset('UTF-8');
     }
-
+    
+    //Initialisation des plugins, on les attache au controller frontal
+   /* protected function  _initPlugins(){
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin( new Appli_Contoller_Plugin_Acl() );
+    }*/
+    
+    
 }
+
 
