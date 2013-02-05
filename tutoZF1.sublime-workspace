@@ -139,6 +139,7 @@
 	},
 	"buffers":
 	[
+
 	],
 	"build_system": "",
 	"command_palette":
@@ -175,11 +176,12 @@
 		"show_minimap": false,
 		"show_open_files": false,
 		"show_tabs": false,
-		"side_bar_visible": false,
+
 		"status_bar_visible": false
 	},
 	"file_history":
 	[
+
 		"/Applications/MAMP/conf/apache/extra/TutoZF1.sublime-project",
 		"/Applications/MAMP/conf/apache/extra/httpd-vhosts.conf",
 		"/Applications/MAMP/htdocs/initializr/index.html",
@@ -218,9 +220,13 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+
+		"height": 93.0,
 		"where_history":
 		[
+			"/Applications/MAMP/htdocs/tutoZF1/application",
+			"/Applications/MAMP/htdocs/tutoZF1",
+
 			""
 		]
 	},
@@ -229,6 +235,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+
 			" add layer",
 			"onVimeoCallback",
 			"vimeo",
@@ -280,6 +287,7 @@
 		{
 			"sheets":
 			[
+
 			]
 		}
 	],
@@ -343,6 +351,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 301.0,
+
 	"status_bar_visible": true
 }
