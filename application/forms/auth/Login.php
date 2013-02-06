@@ -1,13 +1,15 @@
 <?php
 /*
- * Forumlaire d'authenfication
+ * formulaire d'authentification
  ============================================*/
 
 class Application_Form_Auth_Login extends Zend_Form{
     
     public function init(){
+        $this->setName('login');
         $this->setMethod('post');
-        //Champs username
+        
+        //Champ username
         $this->addElement(
                 'text',
                 'username',
@@ -17,6 +19,7 @@ class Application_Form_Auth_Login extends Zend_Form{
                     'filter'    => array('StringTrim'),
                 )
             );
+        
         //Champs password
         $this->addElement(
                 'password',

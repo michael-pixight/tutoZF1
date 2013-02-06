@@ -1,12 +1,14 @@
+<?php $this->headTitle('Login'); ?>
+<h1>Login</h1>
 <?php
+ $this->loginForm->setAction($this->url());
+echo $this->loginForm;
 
-/*$this->loginForm->setAction($this->url());
-echo $this->loginForm;*/
-
+//debug de ouf
+/*
+$auth  = Zend_Auth::getInstance();
+echo '<pre>', print_r($auth, 1), '</pre>';*/
+/*
  if ( isset($this->identity) ) : ?>
-
-<h6>Salut <?php echo $this->escape( $this->identity['name'] ); ?></h6>
-    
-<?php else : ?>
-    <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>
-<?php endif; ?>
+    <h6>Salut <?php echo $this->escape( $this->identity['name'] ); ?></h6>
+<?php endif;*/ ?>

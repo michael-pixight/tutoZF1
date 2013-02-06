@@ -3,7 +3,7 @@
 
 class Appli_Acl extends Zend_Acl{
     
-    public function __construct() {        
+    public function __construct() {
         $aclFile = APPLICATION_PATH . '/configs/acl.ini';
         $config = new Zend_Config_Ini($aclFile);
         
@@ -14,7 +14,7 @@ class Appli_Acl extends Zend_Acl{
         foreach ($config as $contoller => $actions){
             foreach ($actions as $action => $roles){
                 $roles = explode(',', $roles);
-                $resource = $contoller . '_' . $action;
+                $resource = $contoller . '_' . $action;                
                 foreach($roles as $role){
                     $role = $role != '' ? $role : 'PUBLIC';
                     //Le role peut deja avoir été ajouté, si ce n'est pas le cas je l'ajoute

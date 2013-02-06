@@ -17,13 +17,14 @@ if ($mysession->counter > 1999) {
 echo $mysession->counter;
 //#end test sessions
 ?>
-<?php if ( isset($this->identity) ) : ?>
 
-<h6>Salut <?php echo $this->escape($this->identity); ?></h6>
-    
+<?php /*if ( isset($this->identity) ) : ?>
+    <!--<h6>Salut <?php echo $this->escape( $this->identity['name'] ); ?></h6>
+    <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'logout'));?>">logout</a>
 <?php else : ?>
-    <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>
-<?php endif; ?>
+    <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>-->
+<?php endif; */ ?>
+    
 
 
 <p><a href="<?php echo $this->url(array('controller'=>'index','action'=>'ajouter'));?>">Ajouter de nouveaux albums</a></p>

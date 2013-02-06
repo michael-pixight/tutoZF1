@@ -13,12 +13,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     //Initialisation des plugins, on les attache au controller frontal
-   /* protected function  _initPlugins(){
+    /*protected function  _initPlugins(){
+        require_once "/Appli/Controller/Plugin/Acl.php";
+        
         $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin( new Appli_Contoller_Plugin_Acl() );
+        $AclPlugin = new Appli_Contoller_Plugin_Acl();
+        $front->registerPlugin( $AclPlugin );
     }*/
-    
-    
 }
-
-

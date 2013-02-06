@@ -9,6 +9,9 @@ class IndexController extends Zend_Controller_Action
     
     public function indexAction()
     {
+        $auth = Zend_Auth::getInstance();
+        $this->view->identity = $auth->getIdentity();
+        
         $albums = new Application_Model_DbTable_Albums();
         $this->view->albums = $albums->fetchAll();
     }
