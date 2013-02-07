@@ -16,18 +16,15 @@ if ($mysession->counter > 1999) {
 }
 echo $mysession->counter;
 //#end test sessions
-?>
 
-<?php /*if ( isset($this->identity) ) : ?>
+/*if ( isset($this->identity) ) : ?>
     <!--<h6>Salut <?php echo $this->escape( $this->identity['name'] ); ?></h6>
     <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'logout'));?>">logout</a>
 <?php else : ?>
     <a href="<?php echo $this->url(array('controller'=>'auth', 'action'=>'login'));?>">login</a>-->
 <?php endif; */ ?>
-    
 
-
-<p><a href="<?php echo $this->url(array('controller'=>'index','action'=>'ajouter'));?>">Ajouter de nouveaux albums</a></p>
+<p><a class="btn btn-primary btn-large"  href="<?php echo $this->url(array('controller'=>'index','action'=>'ajouter'));?>">Ajouter de nouveaux albums</a></p>
 <table>
     <tr>
         <th>Titre</th>
@@ -39,8 +36,8 @@ echo $mysession->counter;
             <td><?php echo $this->escape($album->titre);?></td>
             <td><?php echo $this->escape($album->artiste);?></td>
             <td>
-                <a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'modifier', 'id'=>$album->id));?>">Modifier</a>
-                <a href="<?php echo $this->url(array('controller'=>'index', 'action'=>'supprimer', 'id'=>$album->id));?>">Supprimer</a>
+                <a class="btn btn-primary" href="<?php echo $this->url(array('controller'=>'index', 'action'=>'modifier', 'id'=>$album->id));?>">Modifier</a>
+                <a class="btn" href="<?php echo $this->url(array('controller'=>'index', 'action'=>'supprimer', 'id'=>$album->id));?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach; ?>

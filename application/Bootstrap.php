@@ -6,10 +6,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $view->doctype('HTML5');
-        $view->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+        $view->headMeta()->setCharset('UTF-8');
+        $view->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge,chrome=1');
+        $view->headMeta()->setName('description', 'test');
+        $view->headMeta()->setName('viewport', 'width=device-width' );
         $view->headTitle()->setSeparator(' - ');
         $view->headTitle('Tutoriel Zend Framework');
-        $view->headMeta()->setCharset('UTF-8');
     }
     
     //Initialisation des plugins, on les attache au controller frontal

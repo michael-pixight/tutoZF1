@@ -15,8 +15,10 @@ class Application_Form_Auth_Login extends Zend_Form{
                 'username',
                 array(
                     'label'     => 'Username : ',
-                    'required'  => true,
+                    'required'  => 'required',
                     'filter'    => array('StringTrim'),
+                    'placeholder' => 'Username',
+                    'class' => 'name',
                 )
             );
         

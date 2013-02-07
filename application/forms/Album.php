@@ -24,7 +24,7 @@ class Application_Form_Album extends Zend_Form
               ->addValidator('NotEmpty');
 
         $envoyer = new Zend_Form_Element_Submit('envoyer');
-        $envoyer->setAttrib('id', 'boutonenvoyer');
+        $envoyer->setAttrib('class', 'btn');
 
         $this->addElements(array($id, $artiste, $titre, $envoyer));
         
