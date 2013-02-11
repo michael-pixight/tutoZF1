@@ -9,14 +9,13 @@ class Zend_View_Helper_loggedInAs extends Zend_View_Helper_Abstract{
         
         //Si le client est identifié on lui retourne le message de bienvenue et le liens pour se delogger
         if( $auth->hasIdentity() ){
-            //echo '<pre>', print_r($auth->getIdentity(), 1), '</pre>';
+            echo '<pre>', print_r($auth->getIdentity(), 1), '</pre>';
             $username = $auth->getIdentity()[username];
-            $logoutUrl = $this->view->url(array('controller'=>'auth', 'action'=>'logout'));            
-
-            return 'Welcome ' . $username .' <a href="' . $logoutUrl . '">Logout</a>';
-                   
-        }       
-            
+            $role = $auth->getIdentity()->role;
+            $logoutUrl = $this->view->url(array('controller'=>'auth', 'action'=>'logout'));
+            return 'Welcome ' . $username .' role : '. $role .'<a href="' . $logoutUrl . '">Logout</a>';
+        }
+        
         //Il n'est pas loggé mais sur la page de login, on ne lui retourne donc aucun lien
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $controller = $request->getControllername();
@@ -26,7 +25,7 @@ class Zend_View_Helper_loggedInAs extends Zend_View_Helper_Abstract{
             return '';
         }
         
-        //Il n'est pas loggé, on ne lui retourne alors le lien pour se logger  
+        //Il n'est pas loggé, on ne lui retourne alors le lien pour se logger
         $loginUrl = $this->view->url(array('controller'=>'auth', 'action'=>'login'));
         return '<a href="'.$loginUrl.'">Login</a>';
     }

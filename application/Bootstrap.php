@@ -22,4 +22,42 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $AclPlugin = new Appli_Contoller_Plugin_Acl();
         $front->registerPlugin( $AclPlugin );
     }*/
+    
+    protected function _initAutoloadRessource(){
+        //configuration de l'Autoload
+        $ressourceLoader = new Zend_Loader_Autoloader_Resource(array(
+            'namespace' => 'Application',
+            'basePath'  => dirname(__FILE__),
+        ));
+        
+        //echo '<pre>', print_r($ressourceLoader, 1), '</pre>';
+        //permet d'indiquer les répertoires dans lesquels se trouveront nos classes:
+        //notamment, l'ACL et le pugin
+        $ressourceLoader->addResourceType('acl', 'acls/', 'Acl')                       
+                        ->addResourceType('plugin', 'plugins/', 'Controller_Plugin');
+        
+        //Zend_Debug::dump($ressourceLoader);
+        //echo '<pre>', print_r($ressourceLoader, 1), '</pre>';
+ 
+        return $ressourceLoader;
+    }
+    
+    protected function _initAcl(){
+        //Création d'une instance de notre ACL
+        $acl = new Application_Acl_MyAcl();
+
+        //enregistrement du plugin de manière à ce qu'il soit exécuté
+        Zend_Controller_Front::getInstance()->registerPlugin(new Application_Controller_Plugin_Acl() );
+        
+        //permet de définir l'acl par défaut à l'aide de vue, de cette manière
+        //l'ACL est accessible dans les vues
+        Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+        
+        //vérifie si une identité existe et applique le rôle
+        $auth = Zend_Auth::getInstance();
+        $role = (!$auth->hasIdentity()) ? 'guest' : $auth->getIdentity()->role;
+        //echo '<pre>', print_r($auth, 1), '</pre>';
+        echo '<pre>', print_r($role, 1), '</pre>';
+    }
+ 
 }

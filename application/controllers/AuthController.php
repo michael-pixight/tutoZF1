@@ -22,7 +22,8 @@ class AuthController extends Zend_Controller_Action{
             $adapter->setCredential($loginForm->getValue('password'));
             
             $auth   = Zend_Auth::getInstance();            
-            $result = $auth->authenticate($adapter);            
+            $result = $auth->authenticate($adapter);
+            Zend_Debug::dump($result);
             //$this->view->identity = $auth->getIdentity();
             
             if( $result->isValid() ){
