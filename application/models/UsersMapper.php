@@ -36,6 +36,7 @@ class Application_Model_UsersMapper{
                 'mail' => $users->getMail(),
                 'username' => $users->getUsername(),                
                 'password' => $users->getPassword(),
+                'salt' => $users->getSalt(),
                 'role' => $users->getRole(),
                 
         );
@@ -71,6 +72,7 @@ class Application_Model_UsersMapper{
         $users->setMail($row->mail);
         $users->setUsername($row->username);        
         $users->setPassword($row->password);
+        $users->setSalt($row->salt);        
         $users->setRole($row->role);
     }
  
@@ -91,6 +93,7 @@ class Application_Model_UsersMapper{
             $entry->setMail($row->mail);
             $entry->setUsername($row->username);            
             $entry->setPassword($row->password);
+            $entry->setSalt($row->salt);
             $entry->setRole($row->role);
             
             $entry->setMapper($this);

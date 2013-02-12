@@ -3,8 +3,8 @@ class UsersController extends Zend_Controller_Action{
     //action par défaut
     public function indexAction(){
         //création d'un d'une instance Default_Model_Users
-        $users = new Application_Model_Users();
-
+        $users = new Application_Model_Users();        
+        
         //$this->view permet d'accéder à la vue qui sera utilisée par l'action
         //on initialise la valeur usersArray de la vue
         //(cf. application/views/scripts/users/index.phtml)
@@ -30,18 +30,28 @@ class UsersController extends Zend_Controller_Action{
             if($form->isValid($data)){
                 //création et initialisation d'un objet Default_Model_Users
                 //qui sera enregistré dans la base de données
+                
+                //Pour le mot de passe on securise pas MD5 + concatenation d'un nombre au hazard
+                $salt = hexdec(bin2hex(openssl_random_pseudo_bytes( 6 )));                
+                $passEnc = MD5($form->getValue('password') . $salt );
+                
+                Zend_Debug::dump($passEnc);
+                
+                
                 $users = new Application_Model_Users();
                 $users->setFirstname($form->getValue('firstname'));
                 $users->setLastname($form->getValue('lastname'));
                 $users->setMail($form->getValue('mail'));
                 $users->setUsername($form->getValue('username'));
-                $users->setPassword($form->getValue('password'));
+                $users->setPassword($passEnc);
+                $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
+                
 
                 $users->save();
 
                 //redirection
-                $this->_helper->redirector('index');
+                //$this->_helper->redirector('index');
             }
             else{
                 //si erreur rencontrée, le formulaire est rempli avec les données
@@ -68,6 +78,9 @@ class UsersController extends Zend_Controller_Action{
 
             //vérifie que les données répondent aux conditions des validateurs
             if($form->isValid($data)){
+                $salt = hexdec(bin2hex(openssl_random_pseudo_bytes( 6 )));
+                $passEnc = MD5($form->getValue('password') . $salt );
+                Zend_Debug::dump($passEnc);
                 //création et initialisation d'un objet Default_Model_Users
                 //qui sera enregistré dans la base de données
                 $users = new Application_Model_Users();
@@ -75,13 +88,15 @@ class UsersController extends Zend_Controller_Action{
                 $users->setFirstname($form->getValue('firstname'));
                 $users->setLastname($form->getValue('lastname'));
                 $users->setMail($form->getValue('mail'));
-                $users->setPassword($form->getValue('password'));
+                $users->setUsername($form->getValue('username'));
+                $users->setPassword($passEnc);
+                $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
                 
                 $users->save();
                 
                 //redirection
-                $this->_helper->redirector('index');
+                //$this->_helper->redirector('index');
             }
             else{
                 //si erreur rencontrée, le formulaire est rempli avec les données

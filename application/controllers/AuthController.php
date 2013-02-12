@@ -31,7 +31,7 @@ class AuthController extends Zend_Controller_Action{
                 $this->_helper->FlashMessenger('Successful login');
                 //$this->_redirect('/');
                 //return;
-            }else{
+            }else{                
                 echo 'Erreur d\'authentification';
             }
         }

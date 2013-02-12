@@ -121,7 +121,7 @@ class Application_Model_Users{
     
     //salt
     public function setSalt($salt){
-        $this->_password = (string)$salt;
+        $this->_salt= (string)$salt;
         return $this;
     }
     
