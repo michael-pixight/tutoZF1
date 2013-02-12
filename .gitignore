@@ -1,5 +1,5 @@
 nbproject/     # ignorer les fichier netBeans
-application/data/session/
+data/session/
 INSTALL.txt
 LICENSE.txt
 README.txt
@@ -8,3 +8,4 @@ extras/documentation
 application/configs/application.ini
 
 .DS_Store
+
