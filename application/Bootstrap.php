@@ -57,7 +57,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $auth = Zend_Auth::getInstance();
         $role = (!$auth->hasIdentity()) ? 'guest' : $auth->getIdentity()->role;
         //echo '<pre>', print_r($auth, 1), '</pre>';
-        echo '<pre>', print_r($role, 1), '</pre>';
+        //echo '<pre>', print_r($role, 1), '</pre>';
     }
  
 }

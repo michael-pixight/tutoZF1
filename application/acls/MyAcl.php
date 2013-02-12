@@ -8,7 +8,7 @@ class Application_Acl_MyAcl extends Zend_Acl{
         $this->_initRights();
         
         //Zend_Registry permet de gerer une collection de valeurs accessible n'importe ou dans notre applicatif, on peut l'assimiler a une variable globale.
-        Zend_Registry::set(MyAcl, $this);
+        Zend_Registry::set('MyAcl', $this);
         
     }
     
