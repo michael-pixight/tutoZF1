@@ -5,3 +5,5 @@ README.txt
 demos/
 extras/documentation
 application/configs/application.ini
+
+.DS_Store
