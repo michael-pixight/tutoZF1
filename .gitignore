@@ -1,4 +1,5 @@
 nbproject/     # ignorer les fichier netBeans
+application/data/
 INSTALL.txt
 LICENSE.txt
 README.txt
