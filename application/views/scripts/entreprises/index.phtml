@@ -1,0 +1,27 @@
+<div>
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>name</th>        
+        </tr>
+        <?php
+            //echo '<pre>', print_r($this->entreprisesArray, 1), '</pre>';
+        
+            //$this->entreprisesArray est une variable qui peut être garnie par le controller
+            //elle doit recevoir un tableau contenant des objets de type Default_Model_Users
+            //le tableau est parcouru par foreach et affiche les propiétés des objets contenus dans le tableau
+            foreach ($this->entreprisesArray as $entreprises) :
+        ?>
+        <tr>
+            <td><?php echo $entreprises->id; ?></td>
+            <td><?php echo $entreprises->name; ?></td>
+            <td>
+                <a href="<?= $this->url(array('controller' => 'entreprises', 'action' => 'edit', 'id' => $entreprises->id), 'default', true); ?>">Edit</a>
+            </td>
+           <td>
+                <a href="<?= $this->url(array('controller' => 'entreprises', 'action' => 'delete', 'id' => $entreprises->id), 'default', true); ?>">Delete</a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </table>
+</div>

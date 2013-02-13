@@ -2,13 +2,11 @@
 
 class IndexController extends Zend_Controller_Action
 {
-    public function init()
-    {
+    public function init(){
         /* Initialize action controller here */
     }
     
-    public function indexAction()
-    {
+    public function indexAction(){
         $auth = Zend_Auth::getInstance();
         $this->view->identity = $auth->getIdentity();
         
@@ -16,8 +14,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->albums = $albums->fetchAll();
     }
     
-    public function modifierAction()
-    {
+    public function modifierAction(){
         $form = new Application_Form_Album();
         $form->envoyer->setLabel('Sauvegarder');
         $this->view->form = $form;
@@ -39,13 +36,11 @@ class IndexController extends Zend_Controller_Action
             if($id > 0){
                 $albums = new Application_Model_DbTable_Albums();
                 $form->populate($albums->obtenirAlbum( $id ) );
-                
             }
         }
     }
 
-    public function ajouterAction()
-    {
+    public function ajouterAction(){
         $form = new Application_Form_Album();
         $form->envoyer->setLabel('Ajouter');
         $this->view->form = $form;
@@ -66,13 +61,13 @@ class IndexController extends Zend_Controller_Action
         }
     }
 
-    public function supprimerAction( $id )
-    {
+    public function supprimerAction(){
+                
         $albums = new Application_Model_DbTable_Albums();
         $id = $this->_getParam('id', 0);
         $this->view->album = $albums->obtenirAlbum($id);
         
-        if ($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isPost()){
             $supprimer = $this->getRequest()->getPost('supprimer');
             //echo $supprimer;
             if($supprimer == "Oui"){
@@ -84,9 +79,6 @@ class IndexController extends Zend_Controller_Action
                 $this->_helper->redirector('index');
             }
         }
-        
-
-        
         //$artiste = $this->album['artiste'];
         //echo $artiste;
         //$titre = $albums->getValue('titre');

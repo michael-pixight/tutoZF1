@@ -27,7 +27,7 @@ class Application_Model_Users{
     public function __set($name, $value){
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Invalid guestbook property');
+            throw new Exception('Invalid users property');
         }
         $this->$method($value);
     }
@@ -37,7 +37,7 @@ class Application_Model_Users{
     public function __get($name){
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
-            throw new Exception('Invalid guestbook property');
+            throw new Exception('Invalid users property');
         }
         return $this->$method();
     }

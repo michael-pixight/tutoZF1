@@ -43,7 +43,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initAcl(){
-        //Création d'une instance de notre ACL
+        //Création d'une instance de notre ACL        
         $acl = new Application_Acl_MyAcl();
 
         //enregistrement du plugin de manière à ce qu'il soit exécuté

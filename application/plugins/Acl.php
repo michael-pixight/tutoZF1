@@ -24,7 +24,7 @@ class Application_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 	{
         
 		$acl = null;
-		$role = null;        
+		$role = null;
 
 		//vérification de l'enregistrement de l'ACL (cf. application/acls/MyAcl.php)
 		if(Zend_Registry::isRegistered('MyAcl'))
@@ -47,10 +47,10 @@ class Application_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 		if($auth->hasIdentity())
 		{
 			//récupération du role (via la database)
-			//$role = $auth->getIdentity()->role;
+			$role = $auth->getIdentity()->role;
             //Zend_Debug::dump($auth->getIdentity()[username]);
             //Zend_Debug::dump($auth->getIdentity()[role]);
-            $role = 'guest';
+            //$role = 'guest';
             
 		}
 		else

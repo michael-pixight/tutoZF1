@@ -66,13 +66,24 @@
             $password->addFilter('StringTrim');
             $password->addValidator('NotEmpty');
             
-            $role = new Zend_Form_Element_Text('role');
+            
+            /*$role = new Zend_Form_Element_Text('role');
             $role->setLabel('role: ');
             $role->setRequired(true);
             $role->addFilter('StripTags');
             $role->addFilter('StringTrim');
-            $role->addValidator('NotEmpty');
+            $role->addValidator('NotEmpty');*/
             
+            // on dispose ici d'un tableau associatif
+            $array = array(
+                'guest'=>'guest',
+                'reader'=>'reader',
+                 'admin'=>'admin'
+            );
+            
+            $role = new Zend_Form_Element_Select('role');
+            $role ->setLabel('role : ')
+                    ->setMultiOptions($array);
             //création d'un élément submit pour envoyer le formulaire
             $submit = new Zend_Form_Element_Submit('submit');
             //définit l'attribut "id" de l'élément submit
