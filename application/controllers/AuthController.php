@@ -2,11 +2,30 @@
 
 class AuthController extends Zend_Controller_Action{
     
+    private $_auth;
+ 
+	public function init(){
+		//récupération de l'instance d'authentification
+		$this->_auth = Zend_Auth::getInstance();
+	}
+    
+    public function indexAction(){
+		//création et affichage dans la vue du formulaire
+		$loginForm = new Application_Form_Auth_Login();
+		$loginForm->setAction($this->view->url(array('controller' => 'auth', 'action' => 'login'), 'default', true));
+        
+        $this->view->loginForm = $loginForm;
+	}
+    
     public function loginAction(){        
                     
         //$this->_redirect('/');
         
-        $db = $this->_getParam('db');
+        //$db = $this->_getParam('db');
+        
+        $db = Zend_Db_Table_Abstract::getDefaultAdapter();
+        
+        
         $loginForm = new Application_Form_Auth_Login();
         
         if( $loginForm->isValid($_POST) ){
@@ -21,14 +40,16 @@ class AuthController extends Zend_Controller_Action{
             $adapter->setIdentity($loginForm->getValue('username'));
             $adapter->setCredential($loginForm->getValue('password'));
             
-            $auth   = Zend_Auth::getInstance();            
-            $result = $auth->authenticate($adapter);
-            Zend_Debug::dump($result);
+            //$auth   = Zend_Auth::getInstance();            
+            $result = $this->_auth->authenticate($adapter);
+            
             //$this->view->identity = $auth->getIdentity();
             
             if( $result->isValid() ){
-                $auth->getStorage()->write(array('username' => $loginForm->getValue('username') ));
+                $this->_auth->getStorage()->write($res = $adapter->getResultRowObject(null, 'password'));
                 $this->_helper->FlashMessenger('Successful login');
+                //permet de regénérer l'identifiant de session
+                Zend_Session::regenerateId();
                 //$this->_redirect('/');
                 //return;
             }else{                

@@ -17,9 +17,9 @@ class Application_Acl_MyAcl extends Zend_Acl{
         //une ressource correspond à un élément pour lequel l'acces est controlé
         //Un ressource par controller
         $this->addResource(new Zend_Acl_Resource('index'));
-        $this->addResource(new Zend_Acl_Resource('error'));
-        $this->addResource(new Zend_Acl_Resource('auth'));
-        $this->addResource(new Zend_Acl_Resource('users'));
+		$this->addResource(new Zend_Acl_Resource('error'));
+		$this->addResource(new Zend_Acl_Resource('auth'));
+		$this->addResource(new Zend_Acl_Resource('users'));
         
     }
     
@@ -32,14 +32,16 @@ class Application_Acl_MyAcl extends Zend_Acl{
         // user
         // guest
         $guest = new Zend_Acl_Role('guest');
-        $user = new Zend_Acl_Role('user');
-        $administrator = new Zend_Acl_Role('administrator');
+		$reader = new Zend_Acl_Role('reader');
+		$admin = new Zend_Acl_Role('admin');
+        
+        //$acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
         //$SuperAdmin = new Zend_Acl_Role('superadmin');
         
         //Ajout des roles à l'ACL avec la methode addRole(), le premier arguement est le role à ajouter, le second indique l'heritage
         $this->addRole($guest);
-        $this->addRole($user, $guest);
-        $this->addRole($administrator, $user);
+        $this->addRole($reader, 'guest');
+        $this->addRole($admin, 'reader');
         //$this->addRole($SuperAdmin, $administrator);
          
     }
@@ -50,9 +52,9 @@ class Application_Acl_MyAcl extends Zend_Acl{
         //Premier argument permet de definir le rôle pour qui la règle est écrite
         //Second argument permet d'indiquer les contrôleurs
         //Troisieme argument permet d'indiquer les actions du contrôleur. 
-        $this->allow( 'guest', array('index', 'error', 'auth', 'users') );
-        $this->allow('user', 'index', 'modifier');
-        $this->allow('administrator' );
+        $this->allow( 'guest', array('index', 'error', 'auth') );
+        $this->allow('reader', 'users');
+        $this->allow('admin' );
     }
             
 }

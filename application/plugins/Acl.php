@@ -47,9 +47,9 @@ class Application_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 		if($auth->hasIdentity())
 		{
 			//récupération du role (via la database)
-			$role = $auth->getIdentity()->role;
-            Zend_Debug::dump($auth->getIdentity()[username]);
-            Zend_Debug::dump($auth->getIdentity()[role]);
+			//$role = $auth->getIdentity()->role;
+            //Zend_Debug::dump($auth->getIdentity()[username]);
+            //Zend_Debug::dump($auth->getIdentity()[role]);
             $role = 'guest';
             
 		}
@@ -95,7 +95,7 @@ class Application_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract
 		}
  
 		//définition des du module, du contrôleur et de l'action
-		//qui sera ùaintenant routée
+		//qui sera maintenant routée
 		//$request->setModuleName($module);
 		$request->setControllerName($controller);
 		$request->setActionName($action);

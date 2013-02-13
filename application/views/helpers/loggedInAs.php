@@ -9,7 +9,7 @@ class Zend_View_Helper_loggedInAs extends Zend_View_Helper_Abstract{
         
         //Si le client est identifié on lui retourne le message de bienvenue et le liens pour se delogger
         if( $auth->hasIdentity() ){
-            echo '<pre>', print_r($auth->getIdentity(), 1), '</pre>';
+            //echo '<pre>', print_r($auth->getIdentity(), 1), '</pre>';
             $username = $auth->getIdentity()->username;
             $role = $auth->getIdentity()->role;
             $logoutUrl = $this->view->url(array('controller'=>'auth', 'action'=>'logout'));
