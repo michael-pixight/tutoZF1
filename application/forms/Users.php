@@ -87,7 +87,7 @@
             //création d'un élément submit pour envoyer le formulaire
             $submit = new Zend_Form_Element_Submit('submit');
             //définit l'attribut "id" de l'élément submit
-            $submit->setAttrib('id', 'submitBt');
+            $submit->setAttribs(array('id'=>'submitBt', 'class'=>"btn"));
  
             //ajout des éléments au formulaire
             $this->addElements(array($id, $firstname, $lastname, $mail, $username, $password, $role, $submit));

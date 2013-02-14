@@ -13,7 +13,7 @@ class Zend_View_Helper_loggedInAs extends Zend_View_Helper_Abstract{
             $username = $auth->getIdentity()->username;
             $role = $auth->getIdentity()->role;
             $logoutUrl = $this->view->url(array('controller'=>'auth', 'action'=>'logout'));
-            return 'Welcome ' . $username .' role : '. $role .'<a href="' . $logoutUrl . '">Logout</a>';
+            return 'Welcome ' . $username .' role : '. $role .'<a class="btn pull-right" href="' . $logoutUrl . '">Logout</a>';
         }
         
         //Il n'est pas loggé mais sur la page de login, on ne lui retourne donc aucun lien
@@ -27,6 +27,6 @@ class Zend_View_Helper_loggedInAs extends Zend_View_Helper_Abstract{
         
         //Il n'est pas loggé, on ne lui retourne alors le lien pour se logger
         $loginUrl = $this->view->url(array('controller'=>'auth', 'action'=>'login'));
-        return '<a href="'.$loginUrl.'">Login</a>';
+        return '<a class="btn" href="'.$loginUrl.'">Login</a>';
     }
 }
