@@ -51,7 +51,7 @@ class Application_Model_UsersMapper{
         }
         else
         {
-            $this->getDbTable()->update($data, array('id = ?' => $id));
+            $this->getDbTable()->update($data, array('user_id = ?' => $id));
         }
     }
  
@@ -66,7 +66,7 @@ class Application_Model_UsersMapper{
         $row = $result->current();
 
         //setting des valeurs dans notre objet $users passé en argument
-        $users->setId($row->id);
+        $users->setId($row->user_id);
         $users->setFirstname($row->firstname);
         $users->setLastname($row->lastname);
         $users->setMail($row->mail);
@@ -87,7 +87,7 @@ class Application_Model_UsersMapper{
         foreach($resultSet as $row)
         {
             $entry = new Application_Model_Users();
-            $entry->setId($row->id);            
+            $entry->setId($row->user_id);            
             $entry->setFirstname($row->firstname);
             $entry->setLastname($row->lastname);
             $entry->setMail($row->mail);

@@ -143,7 +143,7 @@ class UsersController extends Zend_Controller_Action{
             $users = new Application_Model_Users();
             //appel de la fcontion de suppression avec en argument,
             //la clause where qui sera appliquée
-            $result = $users->delete("id=$id");
+            $result = $users->delete("user_id=$id");
 
             //redirection
             $this->_helper->redirector('index');
