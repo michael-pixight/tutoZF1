@@ -10,13 +10,13 @@ class Application_Acl_MyAcl extends Zend_Acl{
         $params = array(
             'host'     => '127.0.0.1',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'dbname'   => 'tutozf1',
             'profiler' => true  // active le profileur ;
                                 // mettre à false pour désactiver
                                 // (désactivé par défaut)
         );
-        $this->_db = Zend_Db::factory('PDO_MYSQL', $params);       
+        $this->_db = Zend_Db::factory('PDO_MYSQL', $params);  
         $this->_initRessources();
         $this->_initRoles();
         $this->_initRights();
@@ -39,11 +39,14 @@ class Application_Acl_MyAcl extends Zend_Acl{
     
     protected function _initRoles(){
         
-        $roles = $this->_db->fetchAll(
-        $this->_db->select()
-            ->from('roles')
-            /*->order(array('role_id DESC'))*/);
-    echo '<pre>', print_r($roles, 1), '</pre>';
+        /*$roles = $this->_db->fetchAll(
+                
+            $this->_db->select()
+                ->from('roles')
+                ->order(array('role_id DESC'))
+        );*/
+        
+        //echo '<pre>', print_r($roles, 1), '</pre>';
         /*$this->addRole(new Zend_Acl_Role($roles[0]['name']));
  
         for ($i = 1; $i < count($roles); $i++) {

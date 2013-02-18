@@ -38,7 +38,7 @@ class EntreprisesController extends Zend_Controller_Action{
                 //Pour le mot de passe on securise pas MD5 + concatenation d'un nombre au hazard               
                 
                 $entreprises = new Application_Model_Entreprises();
-                $entreprises->setFirstname($form->getValue('name'));
+                $entreprises->setName($form->getValue('name'));
                                
                 $entreprises->save();
 
