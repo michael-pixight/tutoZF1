@@ -1,0 +1,31 @@
+<div>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>name</th>            
+            <!--<th>password</th>
+            <th>salt</th>-->
+            <th></th>
+            <th></th>
+        </tr>
+        <?php
+            //echo '<pre>', print_r($this->usersArray, 1), '</pre>';
+        
+            //$this->usersArray est une variable qui peut être garnie par le controller
+            //elle doit recevoir un tableau contenant des objets de type Application_Model_Users
+            //le tableau est parcouru par foreach et affiche les propiétés des objets contenus dans le tableau
+            foreach ($this->rolesArray as $roles) :
+        ?>
+        <tr>
+            <td><?php echo $roles->id; ?></td>
+            <td><?php echo $roles->name; ?></td>
+            <td>
+                <a href="<?= $this->url(array('controller' => 'roles', 'action' => 'edit', 'id' => $roles->id), 'default', true); ?>">Edit</a>
+            </td>
+           <td>
+                <a href="<?= $this->url(array('controller' => 'roles', 'action' => 'delete', 'id' => $roles->id), 'default', true); ?>">Delete</a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </table>
+</div>

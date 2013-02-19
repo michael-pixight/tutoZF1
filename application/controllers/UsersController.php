@@ -8,8 +8,11 @@ class UsersController extends Zend_Controller_Action{
         //$this->view permet d'accéder à la vue qui sera utilisée par l'action
         //on initialise la valeur usersArray de la vue
         //(cf. application/views/scripts/users/index.phtml)
-        //la valeur correspond à un tableau d'objets de type Default_Model_Users récupérés par la méthode fetchAll()
+        //la valeur correspond à un tableau d'objets de type Application_Model_Users récupérés par la méthode fetchAll()
         $this->view->usersArray = $users->fetchAll();
+        
+        $roles = new Application_Model_roles();
+        $this->view->rolesArray = $roles->fetchAll();
     }
 
     public function createAction(){
@@ -49,7 +52,7 @@ class UsersController extends Zend_Controller_Action{
                 $users->setPassword($passEnc);
                 $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
-                
+                $users->setRolesId($form->getValue('role_id'));
 
                 $users->save();
 
@@ -95,6 +98,7 @@ class UsersController extends Zend_Controller_Action{
                 $users->setPassword($passEnc);
                 $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
+                $users->setRolesId($form->getValue('role_id'));
                 
                 $users->save();
                 
@@ -126,6 +130,11 @@ class UsersController extends Zend_Controller_Action{
                 $data['mail'] = $user->getMail();
                 $data['password'] = $user->getPassword();
                 $data['role'] = $user->getRole();
+                $data['roleId'] = $user->getRolesId(); /**/
+                
+                $data['roleName'] = $user->getRoleName($user->getRolesId());         
+                
+                
                 $form->populate($data);
             }
         }

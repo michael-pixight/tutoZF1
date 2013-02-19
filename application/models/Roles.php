@@ -90,8 +90,9 @@ class Application_Model_Roles{
 
     //méthodes de classe utilisant les méthodes du mapper
     //crée ou met à jour une entrée dans la table
-    public function save(){        
+    public function save(){
         $this->getMapper()->save($this);
+        echo '<pre>', print_r('edrg<g', 1), '</pre>';
     }
 
     //récupère une entrée particulière

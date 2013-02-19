@@ -21,7 +21,7 @@ class Application_Model_RolesMapper{
     //guetter
     public function getDbTable(){
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Entreprises');
+            $this->setDbTable('Application_Model_DbTable_Roles');
         }
         return $this->_dbTable;
     }
@@ -77,7 +77,7 @@ class Application_Model_RolesMapper{
         {
             $entry = new Application_Model_Roles();
             $entry->setId($row->id);            
-            $entry->setName($row->name);            
+            $entry->setName($row->name);
             
             $entry->setMapper($this);
 

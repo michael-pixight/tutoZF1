@@ -38,6 +38,7 @@ class Application_Model_UsersMapper{
                 'password' => $users->getPassword(),
                 'salt' => $users->getSalt(),
                 'role' => $users->getRole(),
+                'rolesId' => $users->getRolesId(), 
                 
         );
 
@@ -74,14 +75,20 @@ class Application_Model_UsersMapper{
         $users->setPassword($row->password);
         $users->setSalt($row->salt);        
         $users->setRole($row->role);
+        $users->setRolesId($row->roles_id);
     }
  
         //récupére toutes les entrées de la table
     public function fetchAll(){
         //récupération dans la variable $resultSet de toutes les entrées de notre table
         $resultSet = $this->getDbTable()->fetchAll();
-
-        //chaque entrée est représentée par un objet Default_Model_Users
+        
+        $roleMapper = new Application_Model_RolesMapper();
+        
+        $resultRolesSet = $roleMapper->getDbTable()->fetchAll();
+        
+        
+        //chaque entrée est représentée par un objet Application_Model_Users
         //qui est ajouté dans un tableau
         $entries = array();
         foreach($resultSet as $row)
@@ -95,6 +102,9 @@ class Application_Model_UsersMapper{
             $entry->setPassword($row->password);
             $entry->setSalt($row->salt);
             $entry->setRole($row->role);
+            //a chaque entrée role id d'un user correspond un name de la table role, dont l'id est egale
+            
+            $entry->setRolesId( $this->getRoleName($row->roles_id));
             
             $entry->setMapper($this);
 
@@ -108,5 +118,20 @@ class Application_Model_UsersMapper{
     //reçoit la condition de suppression (le plus souvent basé sur l'id)
     public function delete($id){
         $result = $this->getDbTable()->delete($id);
+    }
+    
+    
+    public function getRoleName($role){
+        $roleMapper = new Application_Model_RolesMapper();        
+        $resultRolesSet = $roleMapper->getDbTable()->fetchAll();
+        foreach ( $resultRolesSet as $rowRoles){
+            if($role == $rowRoles->id){
+                $rolesName = $rowRoles->name;
+            }else{
+                $rolesName = 'guest';
+            }
+        }
+        return $rolesName;
+        
     }
 }

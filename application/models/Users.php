@@ -10,6 +10,8 @@ class Application_Model_Users{
     protected $_password;
     protected $_salt;
     protected $_role;
+    protected $_roles_id;
+    protected $_roles_name;
 
     //le mapper va nous fournir les méthodes pour interagir avec notre table (objet de type Default_Model_UsersMapper)
     protected $_mapper;
@@ -35,7 +37,9 @@ class Application_Model_Users{
     //cette méthode permet d'appeler n'importe quel gettor en fonction
     //du nom passé en argument
     public function __get($name){
+        
         $method = 'get' . $name;
+        //Zend_debug::dump($method);
         if (('mapper' == $name) || !method_exists($this, $method)) {
             throw new Exception('Invalid users property');
         }
@@ -139,13 +143,29 @@ class Application_Model_Users{
         return $this->_role;
     }
     
+    //rôle
+    public function setRolesId($role){
+        $this->_roles_id = (string)$role;
+        return $this;
+    }
+    
+    public function getRolesId(){
+        return $this->_roles_id;
+    }
+    
+    //role nom
+    public function getRoleName(){        
+        $roleMapper = new Application_Model_RolesMapper();        
+        return $this->_roles_name = $roleMapper->getDbTable()->fetchAll();        
+    }
+    
     //mapper
     public function setMapper($mapper){
         $this->_mapper = $mapper;
         return $this;
     }
     
-    public function getMapper(){        
+    public function getMapper(){
         //si la valeur $_mapper n'est pas initialisée, on l'initialise (
         if(null === $this->_mapper){
             $this->setMapper(new Application_Model_UsersMapper());

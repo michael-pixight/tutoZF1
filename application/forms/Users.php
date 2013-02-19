@@ -80,16 +80,35 @@
                 'reader'=>'reader',
                  'admin'=>'admin'
             );
-            
             $role = new Zend_Form_Element_Select('role');
             $role ->setLabel('role : ')
                     ->setMultiOptions($array);
+            
+            
+            $rolesIdArray = $array = array(
+                '1'=>'guestf',
+                '2'=>'userf',
+                '3'=>'adminf',
+                '4'=>'superadminf'
+            );
+            
+            $rolesIdArrayObj = new Application_Model_Roles();
+            $a = $rolesIdArrayObj->fetchAll();
+            //$rolesIdArray->fetchAll();
+            
+            echo '<pre>', print_r($a['0']->name, 1), '</pre>';
+            
+            
+            $roleName = new Zend_Form_Element_Select('$rolesName');
+            $roleName ->setLabel('role name : ')
+                    ->setMultiOptions($rolesIdArray);
+            
             //création d'un élément submit pour envoyer le formulaire
             $submit = new Zend_Form_Element_Submit('submit');
             //définit l'attribut "id" de l'élément submit
             $submit->setAttribs(array('id'=>'submitBt', 'class'=>"btn"));
  
             //ajout des éléments au formulaire
-            $this->addElements(array($id, $firstname, $lastname, $mail, $username, $password, $role, $submit));
+            $this->addElements(array($id, $firstname, $lastname, $mail, $username, $password, $role, $roleName, $submit));
         }
     }
