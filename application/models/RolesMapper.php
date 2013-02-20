@@ -82,8 +82,7 @@ class Application_Model_RolesMapper{
             $entry->setMapper($this);
 
             $entries[] = $entry;
-        }
-
+        }        
         return $entries;
     }    
  

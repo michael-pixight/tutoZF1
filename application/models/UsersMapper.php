@@ -30,6 +30,7 @@ class Application_Model_UsersMapper{
     public function save(Application_Model_Users $users){
         //récupération dans un tableau des données de l'objet $users
         //les noms des clés du tableau correspondent aux noms des champs de la table
+        
         $data = array(
                 'firstname' => $users->getFirstname(),
                 'lastname' => $users->getLastname(),           
@@ -38,20 +39,17 @@ class Application_Model_UsersMapper{
                 'password' => $users->getPassword(),
                 'salt' => $users->getSalt(),
                 'role' => $users->getRole(),
-                'rolesId' => $users->getRolesId(), 
-                
+                'roles_id' => $users->getRolesId(), //nom de la colonne
         );
-
+        //echo '<pre>', print_r($data['firstname'], 1), '</pre>';
         //on vérifie si un l'objet $users contient un id
         //si ce n'est pas le cas, il s'agit d'un nouvel enregistrement
         //sinon, c'est une mise à jour d'une entrée à effectuer
-        if(null === ($id = $users->getId()))
-        {
+        if(null === ($id = $users->getId())){
             unset($data['id']);
             $this->getDbTable()->insert($data);
         }
-        else
-        {
+        else{
             $this->getDbTable()->update($data, array('user_id = ?' => $id));
         }
     }

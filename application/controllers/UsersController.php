@@ -16,21 +16,28 @@ class UsersController extends Zend_Controller_Action{
     }
 
     public function createAction(){
-        //création du fomulaire
+        //création de l'objet fomulaire
         $form = new Application_Form_Users();
+                
+        //Recupere un objet role que je met dans un tableau
+        $roles = new Application_Model_roles();
+        $arrayRoles = $roles->fetchAll();
+        
+        //je recupere l'id et le nom du role pour creer un nouveau tableau
+        foreach ($arrayRoles as $role ) :
+            $arrayRole[$role->id] = $role->name;
+        endforeach;
+        
+        //j'envois dans mon form/user.php un selecteur sous la forme <option label="guest" value="1">guest</option> YEAH§§§§
+        $form->items->addMultiOptions($arrayRole);
+        
         //indique l'action qui va traiter le formulaire
         $form->setAction($this->view->url(array('controller' => 'users', 'action' => 'create'), 'default', true));
         $form->submit->setLabel('Create');
-
+        
         //assigne le formulaire à la vue
         $this->view->form = $form;
         
-        $usersDb = new Application_Model_Users();
-        $roles = $usersDb->role;
-        $this->view->usersDb = $usersDb;
-
-        Zend_Debug::dump($usersDb);
-
         //si la page est POSTée = formulaire envoyé
         if($this->_request->isPost()){
             //récupération des données envoyées par le formulaire
@@ -73,7 +80,18 @@ class UsersController extends Zend_Controller_Action{
         //indique l'action qui va traiter le formulaire
         $form->setAction($this->view->url(array('controller' => 'users', 'action' => 'edit'), 'default', true));
         $form->submit->setLabel('Update');
-
+        //Recupere un objet role que je met dans un tableau
+        $roles = new Application_Model_roles();
+        $arrayRoles = $roles->fetchAll();
+        
+        //je recupere l'id et le nom du role pour creer un nouveau tableau
+        foreach ($arrayRoles as $role ) :
+            $arrayRole[$role->id] = $role->name;
+        endforeach;
+        
+        //j'envois dans mon form/user.php un selecteur sous la forme <option label="guest" value="1">guest</option> YEAH§§§§
+        
+        $form->items->addMultiOptions($arrayRole);         
         //assigne le formulaire à la vue
         $this->view->form = $form;
 
@@ -85,8 +103,7 @@ class UsersController extends Zend_Controller_Action{
             //vérifie que les données répondent aux conditions des validateurs
             if($form->isValid($data)){
                 $salt = hexdec(bin2hex(openssl_random_pseudo_bytes( 6 )));
-                $passEnc = MD5($form->getValue('password') . $salt );
-                Zend_Debug::dump($passEnc);
+                $passEnc = MD5($form->getValue('password') . $salt );                
                 //création et initialisation d'un objet Default_Model_Users
                 //qui sera enregistré dans la base de données
                 $users = new Application_Model_Users();
@@ -98,7 +115,9 @@ class UsersController extends Zend_Controller_Action{
                 $users->setPassword($passEnc);
                 $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
-                $users->setRolesId($form->getValue('role_id'));
+                $users->setRolesId($form->getValue('role'));
+                
+                Zend_Debug::dump($form);
                 
                 $users->save();
                 
@@ -130,10 +149,8 @@ class UsersController extends Zend_Controller_Action{
                 $data['mail'] = $user->getMail();
                 $data['password'] = $user->getPassword();
                 $data['role'] = $user->getRole();
-                $data['roleId'] = $user->getRolesId(); /**/
-                
-                $data['roleName'] = $user->getRoleName($user->getRolesId());         
-                
+                $data['roleId'] = $user->getRolesId(); /**/          
+                $data['roleName'] = $user->getRoleName($user->getRolesId()); 
                 
                 $form->populate($data);
             }
