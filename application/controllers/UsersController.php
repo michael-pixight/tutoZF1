@@ -29,7 +29,7 @@ class UsersController extends Zend_Controller_Action{
         endforeach;
         
         //j'envois dans mon form/user.php un selecteur sous la forme <option label="guest" value="1">guest</option> YEAH§§§§
-        $form->items->addMultiOptions($arrayRole);
+        $form->roles_id->addMultiOptions($arrayRole);
         
         //indique l'action qui va traiter le formulaire
         $form->setAction($this->view->url(array('controller' => 'users', 'action' => 'create'), 'default', true));
@@ -60,7 +60,9 @@ class UsersController extends Zend_Controller_Action{
                 $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
                 $users->setRolesId($form->getValue('role_id'));
-
+                
+                Zend_Debug::dump($form->getValues());
+                break;
                 $users->save();
 
                 //redirection
@@ -89,9 +91,8 @@ class UsersController extends Zend_Controller_Action{
             $arrayRole[$role->id] = $role->name;
         endforeach;
         
-        //j'envois dans mon form/user.php un selecteur sous la forme <option label="guest" value="1">guest</option> YEAH§§§§
-        
-        $form->items->addMultiOptions($arrayRole);         
+        //j'envois dans mon form/user.php un selecteur sous la forme <option label="guest" value="1">guest</option> YEAH§§§§        
+        $form->roles_id->addMultiOptions($arrayRole);
         //assigne le formulaire à la vue
         $this->view->form = $form;
 
@@ -115,9 +116,10 @@ class UsersController extends Zend_Controller_Action{
                 $users->setPassword($passEnc);
                 $users->setSalt($salt);
                 $users->setRole($form->getValue('role'));
-                $users->setRolesId($form->getValue('role'));
+                $users->setRolesId($form->getValue('roles_id'));
                 
-                Zend_Debug::dump($form);
+                //Zend_Debug::dump($form->getValues());
+                
                 
                 $users->save();
                 

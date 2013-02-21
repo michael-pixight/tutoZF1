@@ -18,7 +18,7 @@ class Application_Model_UsersMapper{
         return $this;
     }
  
-    //guetter
+    //getter
     public function getDbTable(){
         if (null === $this->_dbTable) {
             $this->setDbTable('Application_Model_DbTable_Users');
@@ -26,11 +26,10 @@ class Application_Model_UsersMapper{
         return $this->_dbTable;
     }
  
-        //sauve une nouvelle entrée dans la table
+    //sauve une nouvelle entrée dans la table
     public function save(Application_Model_Users $users){
         //récupération dans un tableau des données de l'objet $users
-        //les noms des clés du tableau correspondent aux noms des champs de la table
-        
+        //les noms des clés du tableau correspondent aux noms des champs de la table        
         $data = array(
                 'firstname' => $users->getFirstname(),
                 'lastname' => $users->getLastname(),           
@@ -41,7 +40,7 @@ class Application_Model_UsersMapper{
                 'role' => $users->getRole(),
                 'roles_id' => $users->getRolesId(), //nom de la colonne
         );
-        //echo '<pre>', print_r($data['firstname'], 1), '</pre>';
+        echo '<pre>', print_r($data['roles_id'], 1), '</pre>';
         //on vérifie si un l'objet $users contient un id
         //si ce n'est pas le cas, il s'agit d'un nouvel enregistrement
         //sinon, c'est une mise à jour d'une entrée à effectuer
@@ -120,13 +119,15 @@ class Application_Model_UsersMapper{
     
     
     public function getRoleName($role){
+        
         $roleMapper = new Application_Model_RolesMapper();        
         $resultRolesSet = $roleMapper->getDbTable()->fetchAll();
-        foreach ( $resultRolesSet as $rowRoles){
+        foreach ( $resultRolesSet as $rowRoles){            
             if($role == $rowRoles->id){
                 $rolesName = $rowRoles->name;
+                return $rolesName;
             }else{
-                $rolesName = 'guest';
+                $rolesName = 'guest';               
             }
         }
         return $rolesName;

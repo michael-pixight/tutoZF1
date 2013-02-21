@@ -43,6 +43,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initAcl(){
+        //je setDefaultAdapter a l'initialisation de mon Acl pour acceder à la base et recupere les roles, users...
+        //Ca revient a Zend_Db_Table::setDefaultAdapter($db); sans le definire xplicitement
+        //http://stackoverflow.com/questions/7029307/no-default-adapters-in-zend-unless-i-add-them-explicitly-is-this-a-feature-or-a
+        //http://www.z-f.fr/forum/viewtopic.php?id=1186
+        $this->bootstrap('db');
         //Création d'une instance de notre ACL        
         $acl = new Application_Acl_MyAcl();
 

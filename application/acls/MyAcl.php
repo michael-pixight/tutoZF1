@@ -7,7 +7,7 @@ class Application_Acl_MyAcl extends Zend_Acl{
     
     public function __construct() {
         
-        $params = array(
+        /*$params = array(
             'host'     => '127.0.0.1',
             'username' => 'root',
             'password' => 'root',
@@ -16,7 +16,7 @@ class Application_Acl_MyAcl extends Zend_Acl{
                                 // mettre à false pour désactiver
                                 // (désactivé par défaut)
         );
-        $this->_db = Zend_Db::factory('PDO_MYSQL', $params);  
+        $this->_db = Zend_Db::factory('PDO_MYSQL', $params);  */
         $this->_initRessources();
         $this->_initRoles();
         $this->_initRights();
@@ -61,6 +61,17 @@ class Application_Acl_MyAcl extends Zend_Acl{
         // administrator
         // user
         // guest
+        
+        
+        $roles = new Application_Model_roles();
+        $arrayRoles = $roles->fetchAll();
+        
+        foreach ($arrayRoles as $roles ) :
+            $arrayRoles[$roles->id] = $roles->name;
+        endforeach;
+        Zend_Debug::dump($arrayRoles);
+        
+        
         $guest = new Zend_Acl_Role('guest');
 		$reader = new Zend_Acl_Role('reader');
 		$admin = new Zend_Acl_Role('admin');
@@ -73,7 +84,6 @@ class Application_Acl_MyAcl extends Zend_Acl{
         $this->addRole($reader, 'guest');
         $this->addRole($admin, 'reader');
         //$this->addRole($SuperAdmin, $administrator);
-         
     }
     
     protected function _initRights(){

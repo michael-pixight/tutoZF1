@@ -75,16 +75,16 @@
             $role->addValidator('NotEmpty');*/
             
             // on dispose ici d'un tableau associatif
-            /*$array = array(
-                'guest'=>'guest',
-                'reader'=>'reader',
-                 'admin'=>'admin'
+            $array = array(
+                '1'=>'guest',
+                '2'=>'reader',
+                 '3'=>'admin'
             );
             $role = new Zend_Form_Element_Select('role');
             $role ->setLabel('role : ')
                     ->setMultiOptions($array);
             
-            */
+            
             /*$rolesIdArray = $array = array(
                 '1'=>'guestf',
                 '2'=>'userf',
@@ -104,17 +104,17 @@
                     ->setMultiOptions($rolesIdArray);
             */
             
-            $role = new Zend_Form_Element_Select('items');
-            $role ->setLabel('role name : ');
-            $role->setAttrib('name','role');
-            $role->setAttrib('id','role');
+            $roleId = new Zend_Form_Element_Select('roles_id');
+            $roleId ->setLabel('role name : ');
+            $roleId->setAttrib('name','roles_id');
+            $roleId->setAttrib('id','roles_id');
             
             //création d'un élément submit pour envoyer le formulaire
             $submit = new Zend_Form_Element_Submit('submit');
             //définit l'attribut "id" de l'élément submit
             $submit->setAttribs(array('id'=>'submitBt', 'class'=>"btn"));
-            
+                        
             //ajout des éléments au formulaire
-            $this->addElements(array($id, $firstname, $lastname, $mail, $username, $password, $role, $submit));
+            $this->addElements(array($id, $firstname, $lastname, $mail, $username, $password, $role, $roleId, $submit));
         }
     }

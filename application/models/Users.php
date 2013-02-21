@@ -135,7 +135,7 @@ class Application_Model_Users{
     
     //rôle
     public function setRole($role){
-        $this->_role = (string)$role;
+        $this->_role = $role;
         return $this;
     }
     
@@ -144,8 +144,8 @@ class Application_Model_Users{
     }
     
     //rôle
-    public function setRolesId($role){
-        $this->_roles_id = (string)$role;
+    public function setRolesId($role_id){
+        $this->_roles_id = $role_id;
         return $this;
     }
     
