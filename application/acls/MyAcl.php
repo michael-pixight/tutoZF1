@@ -64,26 +64,32 @@ class Application_Acl_MyAcl extends Zend_Acl{
         
         
         $roles = new Application_Model_roles();
-        $arrayRoles = $roles->fetchAll();
+        $fetchRoles = $roles->fetchAll();
         
-        foreach ($arrayRoles as $roles ) :
+        foreach ($fetchRoles as $roles ) :
             $arrayRoles[$roles->id] = $roles->name;
+            $this->addRole( new Zend_Acl_Role($roles->name) );
         endforeach;
-        Zend_Debug::dump($arrayRoles);
         
         
-        $guest = new Zend_Acl_Role('guest');
-		$reader = new Zend_Acl_Role('reader');
+        
+        Zend_Debug::dump($this->getRoles());
+        
+        
+        /*$guest = new Zend_Acl_Role('guest');
+		$user = new Zend_Acl_Role('user');
 		$admin = new Zend_Acl_Role('admin');
+        $superAdmin = new Zend_Acl_Role('superAdmin');*/
         
         //$acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
         //$SuperAdmin = new Zend_Acl_Role('superadmin');
         
         //Ajout des roles à l'ACL avec la methode addRole(), le premier arguement est le role à ajouter, le second indique l'heritage
-        $this->addRole($guest);
-        $this->addRole($reader, 'guest');
-        $this->addRole($admin, 'reader');
-        //$this->addRole($SuperAdmin, $administrator);
+        /*$this->addRole($guest);
+        $this->addRole($user, 'guest');
+        $this->addRole($admin, 'user');
+        $this->addRole($superAdmin, 'admin');
+        //$this->addRole($SuperAdmin, $administrator);*/
     }
     
     protected function _initRights(){
@@ -93,7 +99,8 @@ class Application_Acl_MyAcl extends Zend_Acl{
         //Second argument permet d'indiquer les contrôleurs
         //Troisieme argument permet d'indiquer les actions du contrôleur. 
         $this->allow( 'guest', array('index', 'error', 'auth'), array('index', 'login', 'logout') );
-        $this->allow('reader', 'users', 'index');
+        $this->allow('user', 'users', 'index');
         $this->allow('admin' );
+        $this->allow('superadmin');
     }
 }
